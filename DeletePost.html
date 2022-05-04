@@ -1,0 +1,49 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <form action="DeletePost.php" method="post">
+                <?php
+                    echo("<table id='table1'>");
+                    echo("<tr>");
+                        echo("<th>post_id</th>");
+                        echo("<th>content</th>");
+                        echo("<th>author_id</th>");
+                        echo("<th>delete?</th>");
+                    echo("</tr>");
+                    $mysqli = new mysqli("mysql.eecs.ku.edu", "a354s553", "eiXoh9de", "a354s553");
+                    if($mysqli->connect_errno){
+                        printf("Connect failed: %s\n", $mysqli->connect_error);
+                        exit();
+                    }
+                    $query = "SELECT * FROM Posts";
+                    if($result = $mysqli->query($query)){
+                        while($row = $result->fetch_assoc()){
+                            echo("<tr>");
+                                echo("<td>");
+                                echo($row['post_id']);
+                                echo("</td>");  
+                                echo("<td>");
+                                echo($row['content']);
+                                echo("</td>");  
+                                echo("<td>");
+                                echo($row['author_id']);
+                                echo("</td>"); 
+                                echo("<td>");
+                                $temp = $row['post_id'];
+                                echo("<input type='checkbox' id='".$temp."' name='".$temp."'>");
+                                echo("</td>"); 
+                            echo("</tr>");
+                           
+                        }
+                    }
+                    echo("</table>");
+                    echo("<style>");
+                        echo("table, td, tr, th{border: 1px solid black}");
+                    echo("</style>");
+                ?>
+            </select>
+            <input type="submit">
+        </form>
+    </body>
+</html>
